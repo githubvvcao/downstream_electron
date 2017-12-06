@@ -105,7 +105,7 @@
     
 
     
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(manifestUrl)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(manifestUrl, customManifestId)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
 
     
@@ -166,6 +166,34 @@
             
 
             <td class="description last">manifest url</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>customManifestId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">custom manifest id, if empty, null or ''
+the id will be generated automatically.<br>
+The manifestId is used to also store information about movie under the same folder so if you overwrite it,
+it will be also used as a name for folder where movie content will be stored
+customManifestId will be validated against default regex
+<a href="DownstreamElectronBE.configuration.html">customManifestIdFolderRegex</a></td>
         </tr>
 
     
@@ -257,6 +285,11 @@ DownstreamElectronFE.downloads.create(url)
    .then(
      function onSuccess(result) {console.log("success", result);},
      function onError(err) {console.log("error", err);
+   })
+DownstreamElectronFE.downloads.create(url, '&lt;myCustomId>')
+   .then(
+     function onSuccess(result) {console.log("success", result);},
+     function onError(err) {console.log("error", err);
    })</code></pre>
 
 
@@ -267,7 +300,7 @@ DownstreamElectronFE.downloads.create(url)
     
 
     
-    <h4 class="name" id=".createPersistent"><span class="type-signature">(static) </span>createPersistent<span class="signature">(manifestId, config)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".createPersistent"><span class="type-signature">(static) </span>createPersistent<span class="signature">(manifestId, config, forced<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
 
     
@@ -299,7 +332,11 @@ DownstreamElectronFE.downloads.create(url)
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -324,7 +361,19 @@ DownstreamElectronFE.downloads.create(url)
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">manifest identifier</td>
@@ -347,10 +396,61 @@ DownstreamElectronFE.downloads.create(url)
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">persistent configuration</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>forced</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">replace existing persistent session, if true</td>
         </tr>
 
     
@@ -447,6 +547,118 @@ DownstreamElectronFE.downloads.create(url)
   }
 };
 DownstreamElectronFE.downloads.createPersistent(manifestId, config)
+   .then(
+     function onSuccess(result) {console.log("success", result);},
+     function onError(err) {console.log("error", err);
+   })</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".getFolderInfo"><span class="type-signature">(static) </span>getFolderInfo<span class="signature">()</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get info about manifest folder
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - promise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>DownstreamElectronFE.downloads.getFolderInfo()
    .then(
      function onSuccess(result) {console.log("success", result);},
      function onError(err) {console.log("error", err);
@@ -2947,6 +3159,191 @@ DownstreamElectronFE.downloads.subscribe(manifestId, 1000, onProgress, onFinish)
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id=".updateDownloadFolder"><span class="type-signature">(static) </span>updateDownloadFolder<span class="signature">(manifestId, downloadFolder)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    update download folder info for manifest id
+this can be usefule when user has copied download folder
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>manifestId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">manifest identifier</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>downloadFolder</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">new download folder path</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - promise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>DownstreamElectronFE.downloads.updateDownloadFolder(manifestId, downloadFolder)
+   .then(
+     function onSuccess(result) {console.log("success", result);},
+     function onError(err) {console.log("error", err);
+   })</code></pre>
+
+
+
+        
     
 
     
@@ -2962,13 +3359,13 @@ DownstreamElectronFE.downloads.subscribe(manifestId, 1000, onProgress, onFinish)
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-util_translation.html">util/translation</a></li></ul><h3>Classes</h3><ul><li><a href="ArrayStorage.html">ArrayStorage</a></li><li><a href="ArrayStorageBridge.html">ArrayStorageBridge</a></li><li><a href="Chunk.html">Chunk</a></li><li><a href="Download.html">Download</a></li><li><a href="DownloadFile.html">DownloadFile</a></li><li><a href="DownloadsController.html">DownloadsController</a></li><li><a href="DownloadsStorageController.html">DownloadsStorageController</a></li><li><a href="DownloadStats.html">DownloadStats</a></li><li><a href="FlushItem.html">FlushItem</a></li><li><a href="ManifestController.html">ManifestController</a></li><li><a href="ManifestLocalLoader.html">ManifestLocalLoader</a></li><li><a href="OfflineController.html">OfflineController</a></li><li><a href="ReadItem.html">ReadItem</a></li><li><a href="Storage.html">Storage</a></li><li><a href="StorageBridge.html">StorageBridge</a></li><li><a href="Subscriber.html">Subscriber</a></li><li><a href="SubscribersController.html">SubscribersController</a></li></ul><h3>Namespaces</h3><ul><li><a href="downloadUtil.html">downloadUtil</a></li><li><a href="DownstreamElectronBE.html">DownstreamElectronBE</a></li><li><a href="DownstreamElectronBE.configuration.html">DownstreamElectronBE.configuration</a></li><li><a href="DownstreamElectronFE.html">DownstreamElectronFE</a></li><li><a href="DownstreamElectronFE.downloads.html">DownstreamElectronFE.downloads</a></li></ul><h3>Interfaces</h3><ul><li><a href="Persistent.html">Persistent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkForLocalFile">checkForLocalFile</a></li><li><a href="global.html#convertStorage">convertStorage</a></li><li><a href="global.html#createBridgeMethods">createBridgeMethods</a></li><li><a href="global.html#defaultOptions">defaultOptions</a></li><li><a href="global.html#dirList">dirList</a></li><li><a href="global.html#errors">errors</a></li><li><a href="global.html#filterDirItem">filterDirItem</a></li><li><a href="global.html#writeProgressUsage">writeProgressUsage</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-util_translation.html">util/translation</a></li></ul><h3>Classes</h3><ul><li><a href="ArrayStorage.html">ArrayStorage</a></li><li><a href="ArrayStorageBridge.html">ArrayStorageBridge</a></li><li><a href="Chunk.html">Chunk</a></li><li><a href="ContentRoute.html">ContentRoute</a></li><li><a href="Download.html">Download</a></li><li><a href="DownloadFile.html">DownloadFile</a></li><li><a href="DownloadFileNoHead.html">DownloadFileNoHead</a></li><li><a href="DownloadsController.html">DownloadsController</a></li><li><a href="DownloadsStorageController.html">DownloadsStorageController</a></li><li><a href="DownloadStats.html">DownloadStats</a></li><li><a href="FlushItem.html">FlushItem</a></li><li><a href="ManifestController.html">ManifestController</a></li><li><a href="ManifestLocalLoader.html">ManifestLocalLoader</a></li><li><a href="OfflineContentServer.html">OfflineContentServer</a></li><li><a href="OfflineContentServer__startServer.html">OfflineContentServer#_startServer</a></li><li><a href="OfflineContentServer_serveOfflineContent.html">OfflineContentServer#serveOfflineContent</a></li><li><a href="OfflineController.html">OfflineController</a></li><li><a href="ReadItem.html">ReadItem</a></li><li><a href="Storage.html">Storage</a></li><li><a href="StorageBridge.html">StorageBridge</a></li><li><a href="Subscriber.html">Subscriber</a></li><li><a href="SubscribersController.html">SubscribersController</a></li></ul><h3>Namespaces</h3><ul><li><a href="downloadUtil.html">downloadUtil</a></li><li><a href="DownstreamElectronBE.html">DownstreamElectronBE</a></li><li><a href="DownstreamElectronBE.configuration.html">DownstreamElectronBE.configuration</a></li><li><a href="DownstreamElectronFE.html">DownstreamElectronFE</a></li><li><a href="DownstreamElectronFE.downloads.html">DownstreamElectronFE.downloads</a></li></ul><h3>Interfaces</h3><ul><li><a href="Persistent.html">Persistent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkForLocalFile">checkForLocalFile</a></li><li><a href="global.html#convertStorage">convertStorage</a></li><li><a href="global.html#createBridgeMethods">createBridgeMethods</a></li><li><a href="global.html#defaultOptions">defaultOptions</a></li><li><a href="global.html#dirList">dirList</a></li><li><a href="global.html#errors">errors</a></li><li><a href="global.html#filterDirItem">filterDirItem</a></li><li><a href="global.html#writeProgressUsage">writeProgressUsage</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 06 2017 19:19:27 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jan 21 2019 21:26:08 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ManifestLocalLoader</title>
+    <title>JSDoc: Class: OfflineContentServer</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ManifestLocalLoader</h1>
+    <h1 class="page-title">Class: OfflineContentServer</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ManifestLocalLoader<span class="signature">(url)</span><span class="type-signature"> &rarr; {Promise}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>OfflineContentServer<span class="signature">(offlineController, downloadController, maxOfflineContentPortRange, offlineContentPort)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,12 +41,16 @@
     
 
     
-    <h4 class="name" id="ManifestLocalLoader"><span class="type-signature"></span>new ManifestLocalLoader<span class="signature">(url)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="OfflineContentServer"><span class="type-signature"></span>new OfflineContentServer<span class="signature">(offlineController, downloadController, maxOfflineContentPortRange, offlineContentPort)</span><span class="type-signature"></span></h4>
     
 
     
 
 
+
+<div class="description">
+    Offline content server
+</div>
 
 
 
@@ -81,7 +85,53 @@
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name"><code>offlineController</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">: offline controller</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>downloadController</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">: download controller</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxOfflineContentPortRange</code></td>
             
 
             <td class="type">
@@ -97,7 +147,30 @@
 
             
 
-            <td class="description last">local url</td>
+            <td class="description last">max range for offline port to on which content can be served</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>offlineContentPort</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">on which port offline content should be served, default is 3010</td>
         </tr>
 
     
@@ -156,28 +229,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    promise
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -190,6 +241,16 @@
 
     
 
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="OfflineContentServer__startServer.html">_startServer</a></dt>
+            <dd></dd>
+        
+            <dt><a href="OfflineContentServer_serveOfflineContent.html">serveOfflineContent</a></dt>
+            <dd></dd>
+        </dl>
     
 
     

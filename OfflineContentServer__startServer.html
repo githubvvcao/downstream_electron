@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ManifestLocalLoader</title>
+    <title>JSDoc: Class: _startServer</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ManifestLocalLoader</h1>
+    <h1 class="page-title">Class: _startServer</h1>
 
     
 
@@ -28,7 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ManifestLocalLoader<span class="signature">(url)</span><span class="type-signature"> &rarr; {Promise}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="OfflineContentServer.html">OfflineContentServer</a>#</span>_startServer<span class="signature">(port, callback)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,12 +42,16 @@
     
 
     
-    <h4 class="name" id="ManifestLocalLoader"><span class="type-signature"></span>new ManifestLocalLoader<span class="signature">(url)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="_startServer"><span class="type-signature"></span>new _startServer<span class="signature">(port, callback)</span><span class="type-signature"></span></h4>
     
 
     
 
 
+
+<div class="description">
+    Start http server in a child_process
+</div>
 
 
 
@@ -81,13 +86,13 @@
 
         <tr>
             
-                <td class="name"><code>url</code></td>
+                <td class="name"><code>port</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">object</span>
 
 
             
@@ -97,7 +102,30 @@
 
             
 
-            <td class="description last">local url</td>
+            <td class="description last">: on which port offline content should be served, default is 3010</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">: a callback function to get listen port (if default is already taken)</td>
         </tr>
 
     
@@ -156,28 +184,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    promise
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
